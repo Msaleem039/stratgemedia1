@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import VideoPlayer from './utils/VideoPlayer';
 import videoData from './videoData';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from './utils/AuthContext.jsx';
 
 const TABS = [
   { key: 'home', label: 'Home' },
@@ -14,6 +16,18 @@ const Home = () => {
   const [modal, setModal] = useState({ open: false, video: null });
   const [activeTab, setActiveTab] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { logout, isAuthenticated, loading } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+    window.location.reload();
+  };
+
+  if (loading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-white text-[#232946] pb-16">
@@ -23,7 +37,7 @@ const Home = () => {
           <div className="text-xl md:text-2xl font-extrabold tracking-tight text-[#41D1FF]">StrategemMedia</div>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex gap-2 md:gap-6">
+          <div className="hidden md:flex gap-2 md:gap-6 items-center">
             {TABS.map(tab => (
               <button
                 key={tab.key}
@@ -33,6 +47,14 @@ const Home = () => {
                 {tab.label}
               </button>
             ))}
+            {isAuthenticated && (
+              <button
+                onClick={handleLogout}
+                className="ml-4 px-4 py-1 rounded-md font-bold bg-[#FFC300] text-[#232946] hover:bg-[#FFD600] transition shadow"
+              >
+                Logout
+              </button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -70,6 +92,17 @@ const Home = () => {
                     {tab.label}
                   </button>
                 ))}
+                {isAuthenticated && (
+                  <button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      handleLogout();
+                    }}
+                    className="mt-2 px-4 py-2 rounded-md font-bold bg-[#FFC300] text-[#232946] hover:bg-[#FFD600] transition shadow"
+                  >
+                    Logout
+                  </button>
+                )}
               </div>
             </motion.div>
           )}
