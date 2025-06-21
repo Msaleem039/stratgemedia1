@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from './utils/AuthContext.jsx';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login, isAuthenticated, error } = useAuth();
@@ -64,13 +66,26 @@ const Login = () => {
             transition={{ delay: 0.4 }}
           >
             <label className="block text-[#232946] font-semibold mb-1">Password</label>
-            <input
-              type="password"
-              className="w-full px-4 py-2 rounded-lg border border-[#41D1FF] focus:outline-none focus:ring-2 focus:ring-[#41D1FF] transition"
-              value={password}
-              onChange={e => setPassword(e.target.value)}
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                className="w-full px-4 py-2 pr-10 rounded-lg border border-[#41D1FF] focus:outline-none focus:ring-2 focus:ring-[#41D1FF] transition"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? (
+                  <EyeOff className="h-5 w-5 text-[#232946]" />
+                ) : (
+                  <Eye className="h-5 w-5 text-[#232946]" />
+                )}
+              </button>
+            </div>
           </motion.div>
           <motion.button
             type="submit"
