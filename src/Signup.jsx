@@ -76,13 +76,13 @@ const Signup = () => {
           >
             <label className="block text-[#232946] font-semibold mb-1">Password</label>
             <div className="relative">
-              <input
+            <input
                 type={showPassword ? "text" : "password"}
                 className="w-full px-4 py-2 pr-10 rounded-lg border border-[#41D1FF] focus:outline-none focus:ring-2 focus:ring-[#41D1FF] transition"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-                required
-              />
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
               <button
                 type="button"
                 className="absolute inset-y-0 right-0 pr-3 flex items-center"

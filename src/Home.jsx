@@ -5,8 +5,10 @@ import videoData from './videoData';
 import videoData1 from './utils/videoData1';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './utils/AuthContext.jsx';
+import Mainpage from './Mainpage';
 
 const TABS = [
+  { key: 'main', label: 'Home' },
   { key: 'home', label: 'Caption' },
   { key: 'tech', label: 'Dubbing' },
   { key: 'ai', label: 'AI Archiving' },
@@ -15,7 +17,7 @@ const TABS = [
 
 const Home = () => {
   const [modal, setModal] = useState({ open: false, video: null });
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('main');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { logout, isAuthenticated, loading } = useAuth();
@@ -114,6 +116,17 @@ const Home = () => {
       <div className="max-w-7xl mx-auto px-4 pt-8">
         {/* Home Tab: Video Grid */}
         <AnimatePresence mode="wait">
+          {activeTab === 'main' && (
+            <motion.section
+              key="main"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 30 }}
+              transition={{ duration: 0.4 }}
+            >
+              <Mainpage setActiveTab={setActiveTab} />
+            </motion.section>
+          )}
           {activeTab === 'home' && (
             <motion.section
               key="home"
@@ -126,35 +139,36 @@ const Home = () => {
                 <h1 className="text-2xl md:text-4xl font-extrabold text-[#232946] mb-2">StrategemMedia Portfolio</h1>
                 <p className="text-xl md:text-2xl text-[#41D1FF] font-medium">AI-Driven Digital Archiving & Multilingual Media Solutions</p>
               </header>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {videoData.map((video) => (
                   <motion.div
                     key={video.id}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-[#F4F6FB] rounded-xl overflow-hidden shadow-lg flex flex-col border border-[#41D1FF]"
+                    className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group"
                   >
                     <div
-                      className="relative group cursor-pointer aspect-video bg-black block"
+                      className="relative cursor-pointer"
                       onClick={() => setModal({ open: true, video })}
                     >
-                      <img
-                        src={video.thumbnail}
-                        alt={video.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        style={{ width: '300px', height: '200px' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center z-10">
-                        <div className="bg-black/60 rounded-full p-4 border-2 border-[#41D1FF]">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="#FFC300" viewBox="0 0 24 24" width="48" height="48">
+                      <div className="aspect-w-16 aspect-h-9">
+                        <img
+                          src={video.thumbnail}
+                          alt={video.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-cyan-400/80 rounded-full p-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="32" height="32">
                             <path d="M8 5v14l11-7z" />
                           </svg>
                         </div>
                       </div>
                     </div>
-                    <div className="p-2 flex-1 flex flex-col justify-between">
-                      <div className="font-bold text-lg text-[#232946] mb-2 line-clamp-2 min-h-[2rem]">{video.title}</div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-base text-gray-800 truncate" title={video.title}>{video.title}</h3>
                     </div>
                   </motion.div>
                 ))}
@@ -176,35 +190,36 @@ const Home = () => {
                 <h1 className="text-2xl md:text-4xl font-extrabold text-[#232946] mb-2">Dubbing</h1>
                 <p className="text-xl md:text-2xl text-[#41D1FF] font-medium">AI-Driven Dubbing Solutions</p>
               </header>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {videoData1.map((video) => (
                   <motion.div
                     key={video.id}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-[#F4F6FB] rounded-xl overflow-hidden shadow-lg flex flex-col border border-[#41D1FF]"
+                    className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 group"
                   >
                     <div
-                      className="relative group cursor-pointer aspect-video bg-black block"
+                      className="relative cursor-pointer"
                       onClick={() => setModal({ open: true, video })}
                     >
-                      <img
-                        src={video.thumbnail}
-                        alt={video.title}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                        style={{ width: '300px', height: '200px' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center z-10">
-                        <div className="bg-black/60 rounded-full p-4 border-2 border-[#41D1FF]">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="#FFC300" viewBox="0 0 24 24" width="48" height="48">
+                      <div className="aspect-w-16 aspect-h-9">
+                        <img
+                          src={video.thumbnail}
+                          alt={video.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="bg-cyan-400/80 rounded-full p-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" width="32" height="32">
                             <path d="M8 5v14l11-7z" />
                           </svg>
                         </div>
                       </div>
                     </div>
-                    <div className="p-2 flex-1 flex flex-col justify-between">
-                      <div className="font-bold text-lg text-[#232946] mb-2 line-clamp-2 min-h-[2rem]">{video.title}</div>
+                    <div className="p-4">
+                      <h3 className="font-bold text-base text-gray-800 truncate" title={video.title}>{video.title}</h3>
                     </div>
                   </motion.div>
                 ))}
@@ -222,15 +237,13 @@ const Home = () => {
               transition={{ duration: 0.4 }}
               className="flex flex-col items-center justify-center min-h-[60vh]"
             >
-             <img src="https://mediatool-videos.ams3.cdn.digitaloceanspaces.com/presentations/demo_complete_with_conclusion.mp4" alt="" />
-              
-              <div 
-                className="max-w-md w-full mb-8 rounded-xl shadow-lg bg-gradient-to-br from-[#232946] to-[#41D1FF] flex items-center justify-center text-white font-bold text-xl"
-                style={{ width: '400px', height: '300px', display: 'none' }}
-              >
-                AI Archiving
+              <div className="w-full max-w-4xl mx-auto mb-8 px-4">
+                <VideoPlayer
+                  src="https://mediatool-videos.ams3.cdn.digitaloceanspaces.com/presentations/demo_complete_with_conclusion.mp4"
+                  title="AI Archiving - Demo"
+                />
               </div>
-              <h2 className="text-3xl font-bold mb-4 text-[#232946]">Preserve. Protect. Power Your Media Future.</h2>
+              <h2 className="text-3xl font-bold mb-4 text-[#232946] mt-8 text-center">Preserve. Protect. Power Your Media Future.</h2>
               <p className="text-lg text-[#232946] mb-4 max-w-2xl text-center">AI-Driven Digital Archiving by StrategemMedia</p>
               <ul className="text-lg text-[#232946] space-y-2">
                 <li>📦 Unmatched Industry Expertise</li>
@@ -269,31 +282,33 @@ const Home = () => {
       <AnimatePresence>
         {modal.open && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onClick={() => setModal({ open: false, video: null })}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
+              initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative w-[95%] max-w-2xl mx-auto rounded-xl overflow-hidden shadow-2xl border-4 border-[#41D1FF] bg-[#232946]"
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 120 }}
+              className="relative w-full max-w-2xl bg-[#0A0F24] p-4 rounded-xl shadow-2xl border border-cyan-400/50"
+              onClick={(e) => e.stopPropagation()}
             >
+              <VideoPlayer src={modal.video.src} title={modal.video.title} />
+              <div className="pt-4 text-center">
+                <h2 className="text-lg md:text-xl font-bold text-cyan-300">{modal.video.title}</h2>
+              </div>
               <button
                 onClick={() => setModal({ open: false, video: null })}
-                className="absolute top-2 right-2 z-10 bg-[#FFC300] text-[#232946] rounded-full p-1 md:p-2 shadow-lg hover:bg-[#FFD600] transition"
+                className="absolute -top-3 -right-3 z-10 bg-cyan-400 text-black rounded-full p-2 shadow-lg hover:bg-cyan-300 transition"
                 aria-label="Close"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20" className="md:w-7 md:h-7">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="20" height="20">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
-              <VideoPlayer src={modal.video.src} title={modal.video.title} />
-              <div className="p-2 md:p-4 text-center">
-                <h2 className="text-lg md:text-2xl font-bold text-[#FFC300] mb-2">{modal.video.title}</h2>
-              </div>
             </motion.div>
           </motion.div>
         )}
