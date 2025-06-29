@@ -33,7 +33,7 @@ import Productable from '@/pages/Productable';
 
 
 
-// 🧩 Layout to show Header/Footer conditionally
+
 export const PublicLayout = () => {
   const location = useLocation();
   const hideFooter = location.pathname === '/login' || location.pathname === '/signup';
