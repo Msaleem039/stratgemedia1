@@ -29,7 +29,7 @@ import UpdateProfile from '@/pages/UpdateProfile';
 import PrivateRoute from '@/Privaterole/PrivateRoute';
 import SettingSection from '@/pages/SettingSection';
 import Profile from '@/pages/Profile';
-import Productable from '@/pages/Productable';
+import Productable from '@/components/Productable';
 
 
 
