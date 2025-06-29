@@ -23,12 +23,15 @@ const Header = () => {
   const isAdmin = auth?.role === "admin";
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     const handleScroll = () => setScrolled(window.scrollY > 50);
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -36,7 +39,11 @@ const Header = () => {
   };
 
   return (
-    <nav className={`bg-[#0D0F2] shadow-md w-full z-50 border-b transition-all duration-300 ${scrolled ? 'fixed top-0' : ''}`}>
+    <nav
+      className={`bg-[#0D0F2] shadow-md w-full z-50 border-b transition-all duration-300 ${
+        scrolled ? "fixed top-0" : ""
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -52,7 +59,9 @@ const Header = () => {
                 to={item.to}
                 className={({ isActive }) =>
                   `text-[1.2rem] font-medium transition-colors duration-200 ${
-                    isActive ? "text-blue-600 underline underline-offset-4" : "text-gray-700 hover:text-blue-600"
+                    isActive
+                      ? "text-blue-600 underline underline-offset-4"
+                      : "text-gray-700 hover:text-blue-600"
                   }`
                 }
               >
