@@ -27,7 +27,7 @@ import ForgotPassword from '@/pages/ForgotPassword';
 import ResetPassword from '@/pages/ResetPassword';
 import UpdateProfile from '@/pages/UpdateProfile';
 import PrivateRoute from '@/Privaterole/PrivateRoute';
-import SettingSection from '@/pages/Settingsection';
+import SettingSection from '@/pages/SettingSection';
 import Profile from '@/pages/Profile';
 import ProductTable from '@/pages/Producttable';
 
