@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import VideoPlayer from './utils/VideoPlayer';
-import videoData from './videoData';
-import videoData1 from './utils/videoData1';
+import VideoPlayer from '../utils/VideoPlayer';
+import videoData from '../videoData';
+import videoData1 from '../utils/videoData1';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './utils/AuthContext.jsx';
+import { useAuth } from '../utils/AuthContext.jsx';
 import Mainpage from './Mainpage';
 
 const TABS = [
