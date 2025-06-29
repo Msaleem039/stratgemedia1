@@ -29,7 +29,7 @@ import UpdateProfile from '@/pages/UpdateProfile';
 import PrivateRoute from '@/Privaterole/PrivateRoute';
 import SettingSection from '@/pages/SettingSection';
 import Profile from '@/pages/Profile';
-import ProductTable from '@/pages/Producttable';
+import ProductTable from '@/pages/ProductTable';
 
 // 🧩 Layout to show Header/Footer conditionally
 export const PublicLayout = () => {
