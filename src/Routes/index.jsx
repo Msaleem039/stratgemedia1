@@ -29,7 +29,8 @@ import UpdateProfile from '@/pages/UpdateProfile';
 import PrivateRoute from '@/Privaterole/PrivateRoute';
 import SettingSection from '@/pages/SettingSection';
 import Profile from '@/pages/Profile';
-import ProductTable from '@/pages/ProductTable';
+import Productable from '@/pages/Productable';
+
 
 
 // 🧩 Layout to show Header/Footer conditionally
@@ -84,7 +85,7 @@ const AppRoutes = () => (
     <Route element={<RoleProtectedRoute allowedRoles={['admin']} />}>
       <Route path="/admin/*" element={<MainAdminLayout />}>
         <Route path="dashboard" element={<DashboardHome />} />
-        <Route path="productable" element={<ProductTable/>} />
+        <Route path="productable" element={<Productable/>} />
         <Route path="add-subtitle-video" element={<AddSubtitleVideo />} />
         {/* <Route path="add-dubbing-video" element={<AddDubbingVideo />} /> */}
         <Route path="settings" element={<SettingSection/>} />

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { updateProduct, deleteProduct } from "../redux/product/productSlice";
 import { toast } from "react-toastify";
 
-const ProductTable = () => {
+const Productable = () => {
   const { products, status, error } = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const [editModal, setEditModal] = useState({ open: false, product: null });
@@ -180,4 +180,4 @@ const ProductTable = () => {
   );
 };
 
-export default ProductTable;
+export default Productable;
