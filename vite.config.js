@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { fileURLToPath, URL } from 'url'
 
 export default defineConfig({
+  base: '/', // ✅ ADD THIS LINE
   plugins: [react()],
   resolve: {
     alias: {
@@ -15,7 +16,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
-  server: {
-    historyApiFallback: true,
-  },
 })
+

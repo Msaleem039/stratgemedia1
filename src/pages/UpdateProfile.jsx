@@ -20,7 +20,7 @@ const UpdateProfile = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const res = await fetch('http://141.136.44.187:5000/api/users/update', {
+      const res = await fetch('https://api.strategemmedia.com/api/users/update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

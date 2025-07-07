@@ -30,6 +30,7 @@ import PrivateRoute from '@/Privaterole/PrivateRoute';
 import SettingSection from '@/pages/SettingSection';
 import Profile from '@/pages/Profile';
 import Productable from '@/components/Productable';
+import Transcription from '@/pages/Transcription';
 
 
 
@@ -64,6 +65,7 @@ const AppRoutes = () => (
       <Route path="/caption" element={<Navigate to="/subtitle" replace />} />
       <Route path="/dubbing" element={<Dubbing />} />
       <Route path="/ai-archiving" element={<AiArchiving />} />
+      <Route path="/Transcription" element={<Transcription />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
@@ -82,7 +84,7 @@ const AppRoutes = () => (
     </Route>
 
     {/* ✅ Admin-only Protected Routes */}
-    <Route element={<RoleProtectedRoute allowedRoles={['admin']} />}>
+    <Route element={<RoleProtectedRoute allowedRoles={['admin', 'superadmin']} />}>
       <Route path="/admin/*" element={<MainAdminLayout />}>
         <Route path="dashboard" element={<DashboardHome />} />
         <Route path="productable" element={<Productable/>} />

@@ -202,7 +202,7 @@ const MainAdminLayout = () => {
       <div className="flex-1 flex flex-col h-full">
         {/* Top Bar */}
         <div className="flex items-center justify-between px-6 py-4 bg-[#19233A] shadow-md border-b border-[#232946]">
-          <div className="text-2xl font-bold tracking-wide text-white">Stratgemedia</div>
+          <div className="text-2xl font-bold tracking-wide text-white">StrategemMedia</div>
           <div className="flex items-center gap-6 relative">
             <button className="relative focus:outline-none" onClick={() => setDropdownOpen((v) => !v)}>
               <img

@@ -29,7 +29,7 @@ const AddUserModal = ({ open, onClose, onSubmit, form, setForm }) => {
               required
             />
           </div>
-          <div>
+          {/* <div>
             <label className="block text-[#232946] font-semibold mb-1 text-sm">Password</label>
             <input
               type="password"
@@ -39,7 +39,7 @@ const AddUserModal = ({ open, onClose, onSubmit, form, setForm }) => {
               className="w-full px-3 py-2 rounded-lg border border-[#41D1FF] focus:outline-none focus:ring-2 focus:ring-[#41D1FF] transition text-sm text-black"
               required
             />
-          </div>
+          </div> */}
           <div>
             <label className="block text-[#232946] font-semibold mb-1 text-sm">Phone</label>
             <input

@@ -28,7 +28,7 @@ const ResetPassword = () => {
     }
     setLoading(true);
     try {
-      const res = await fetch('http://141.136.44.187:5000/api/reset-password', {
+      const res = await fetch('https://api.strategemmedia.com/api/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token, password: data.password })

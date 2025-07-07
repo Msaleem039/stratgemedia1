@@ -10,7 +10,7 @@ const ForgotPassword = () => {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const res = await fetch('http://141.136.44.187:5000/api/forgot-password', {
+      const res = await fetch('https://api.strategemmedia.com/api/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: data.email })

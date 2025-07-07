@@ -33,7 +33,7 @@ const ListUser = () => {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get("http://141.136.44.187:5000/api/users/all");
+      const res = await axios.get("https://api.strategemmedia.com/api/users/all");
       console.log("API Response:", res.data);
       
       // Handle different possible response structures
@@ -84,7 +84,7 @@ const ListUser = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://141.136.44.187:5000/api/users/update/${selectedUser._id || selectedUser.id}`,
+        `https://api.strategemmedia.com/api/users/update/${selectedUser._id || selectedUser.id}`,
         {
           status: editForm.status,
         },
@@ -123,7 +123,7 @@ const ListUser = () => {
     
     try {
       await axios.delete(
-        `http://141.136.44.187:5000/api/users/${userId}`,
+        `https://api.strategemmedia.com/api/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -143,7 +143,7 @@ const ListUser = () => {
   const handleAddUser = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://141.136.44.187:5000/api/register", addForm, {
+      const res = await axios.post("https://api.strategemmedia.com/api/register", addForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success(res.data.message || "User created");

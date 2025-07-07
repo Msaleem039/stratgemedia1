@@ -27,14 +27,15 @@ const Login = () => {
       toastShown.current = true;
       toast.success('Login successful!');
       
+      // Debug log for role
+      console.log("Auth object after login:", auth);
       // Add delay before navigation to ensure toast is visible
       setTimeout(() => {
-        if (auth.role === 'admin') {
+        const role = auth.role?.toLowerCase();
+        if (role === 'superadmin' || role === 'admin') {
           navigate('/admin/dashboard');
-        } else if (auth.role === 'user') {
-          navigate('/');
         } else {
-          navigate('/unauthorized');
+          navigate('/');
         }
       }, 1500); // 1.5 second delay
     }

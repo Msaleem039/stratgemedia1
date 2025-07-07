@@ -156,9 +156,9 @@ const Productable = () => {
       {/* Delete Modal */}
       {deleteModal.open && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
-          <div className="bg-white p-4 sm:p-6 rounded-lg w-full max-w-xs shadow-xl">
+          <div className="bg-white p-4 sm:p-6 rounded-lg w-full max-w-xs shadow-xl text-black">
             <h3 className="text-lg sm:text-xl font-bold mb-4">Delete Product?</h3>
-            <p className="mb-6">Are you sure you want to delete this product?</p>
+            <p className="mb-6 text-black">Are you sure you want to delete this product?</p>
             <div className="flex flex-col sm:flex-row justify-end gap-2">
               <button 
                 onClick={() => setDeleteModal({ open: false, productId: null })} 

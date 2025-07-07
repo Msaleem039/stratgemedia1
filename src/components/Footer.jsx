@@ -31,7 +31,7 @@ const Footer = () => (
           <ul className="space-y-3">
             {[
               { label: 'Home', url: '/' },
-              { label: 'Caption', url: '/caption' },
+              { label: 'Subtitle', url: '/caption' },
               { label: 'Dubbing', url: '/dubbing' },
               { label: 'AI Archiving', url: '/ai-archiving' },
               { label: 'Contact', url: '/contact' }

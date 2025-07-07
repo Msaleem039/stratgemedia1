@@ -16,10 +16,11 @@ const AddSubtitleVideo = () => {
     image: "",
   });
 
+  const [imageSource, setImageSource] = useState("upload"); // "upload" or "url"
+
   const dispatch = useDispatch();
   const addLoading = useSelector((state) => state.products.addLoading);
 
-  // ✅ Reset loader on mount
   useEffect(() => {
     dispatch(resetAddLoading());
   }, [dispatch]);
@@ -36,36 +37,31 @@ const AddSubtitleVideo = () => {
   };
 
   const handleSubmit = async (e) => {
-	e.preventDefault();
-  
-	if (
-	  !newProduct.title ||
-	  !newProduct.videoUrl ||
-	  !newProduct.category ||
-	  !newProduct.image
-	) {
-	  toast.warn("Please fill all fields and select a thumbnail image.");
-	  return;
-	}
-  
-	dispatch(addProduct(newProduct))
-	  .unwrap()
-	  .then(() => {
-		toast.success("Video uploaded successfully!");
-		setNewProduct({
-		  title: "",
-		  videoUrl: "",
-		  category: "",
-		  image: "",
-		});
-		dispatch(resetAddLoading()); // ✅ Reset loading after success
-	  })
-	  .catch((err) => {
-		toast.error(err?.message || "Something went wrong!");
-		dispatch(resetAddLoading()); // ✅ Reset loading after failure
-	  });
+    e.preventDefault();
+
+    if (!newProduct.title || !newProduct.videoUrl || !newProduct.category || !newProduct.image) {
+      toast.warn("Please fill all fields and select an image (upload or URL).");
+      return;
+    }
+
+    dispatch(addProduct(newProduct))
+      .unwrap()
+      .then(() => {
+        toast.success("Video uploaded successfully!");
+        setNewProduct({
+          title: "",
+          videoUrl: "",
+          category: "",
+          image: "",
+        });
+        setImageSource("upload");
+        dispatch(resetAddLoading());
+      })
+      .catch((err) => {
+        toast.error(err?.message || "Something went wrong!");
+        dispatch(resetAddLoading());
+      });
   };
-  
 
   return (
     <motion.div
@@ -107,17 +103,62 @@ const AddSubtitleVideo = () => {
           ))}
         </select>
 
-        <div>
-          <label className="text-white mb-1 block">Thumbnail Image</label>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-          {newProduct.image && (
-            <img
-              src={newProduct.image}
-              alt="preview"
-              className="mt-3 h-24 rounded border"
+        {/* Radio buttons for selecting image method */}
+        <div className="text-white space-x-4">
+          <label>
+            <input
+              type="radio"
+              value="upload"
+              checked={imageSource === "upload"}
+              onChange={() => {
+                setImageSource("upload");
+                setNewProduct((prev) => ({ ...prev, image: "" }));
+              }}
+              className="mr-1"
             />
-          )}
+            Upload Image
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="url"
+              checked={imageSource === "url"}
+              onChange={() => {
+                setImageSource("url");
+                setNewProduct((prev) => ({ ...prev, image: "" }));
+              }}
+              className="mr-1"
+            />
+            Use Image URL
+          </label>
         </div>
+
+        {imageSource === "upload" ? (
+          <div>
+            <label className="text-white block mb-1">Select Image</label>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+          </div>
+        ) : (
+          <div>
+            <label className="text-white block mb-1">Image URL</label>
+            <input
+              type="text"
+              placeholder="https://example.com/image.jpg"
+              value={newProduct.image}
+              onChange={(e) => setNewProduct((prev) => ({ ...prev, image: e.target.value }))}
+              className="w-full px-3 py-2 bg-gray-700 text-white rounded"
+            />
+          </div>
+        )}
+
+        {/* Preview */}
+        {newProduct.image && (
+          <img
+            src={newProduct.image}
+            alt="preview"
+            className="mt-3 h-24 rounded border"
+          />
+        )}
 
         <button
           type="submit"

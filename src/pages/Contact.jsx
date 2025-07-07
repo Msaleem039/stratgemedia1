@@ -18,7 +18,7 @@ const Contact = () => {
     e.preventDefault();
     setStatus(null);
     try {
-      await axios.post('http://141.136.44.187:5000/api/submit', form);
+      await axios.post('https://api.strategemmedia.com/api/submit', form);
       setStatus('success');
       setForm({ name: '', email: '', subject: '', message: '' });
     } catch (err) {
